@@ -38,11 +38,11 @@ class _FetchStatusState extends State<FetchStatus> {
       textToShow = utf8.decode(event);
     });
 
-    // send hello
-    socket.add(utf8.encode('hello'));
+    // send Status
+    socket.add(utf8.encode('status'));
 
     // wait 5 seconds
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(seconds: 5));
 
     setState(() {
       // .. and close the socket
@@ -91,9 +91,8 @@ class _FetchStatusState extends State<FetchStatus> {
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
           ),
           child: Center(
-              child: Text(
-            textToShow,
-          )),
+            child: Text(textToShow),
+          ),
         )
       ],
     );
