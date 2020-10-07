@@ -39,7 +39,7 @@ class _FetchStatusState extends State<FetchStatus> {
     });
 
     // send Status
-    socket.add(utf8.encode('status'));
+    socket.add(utf8.encode('status\n'));
 
     // wait 5 seconds
     await Future.delayed(Duration(seconds: 5));
