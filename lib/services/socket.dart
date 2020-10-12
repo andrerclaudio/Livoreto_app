@@ -17,7 +17,8 @@ Future<String> sendData() async {
   });
 
   // send Status
-  socket.add(utf8.encode('status\n'));
+  // socket.add(utf8.encode('page\n@1@600'));
+  socket.add(utf8.encode('status\n@1@ '));
 
   await Future.delayed(Duration(seconds: 3));
 
@@ -25,5 +26,5 @@ Future<String> sendData() async {
   socket.destroy();
   log('Disconnected');
 
-  return textToShow;
+  return textToShow.toString();
 }

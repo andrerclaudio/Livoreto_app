@@ -11,6 +11,17 @@ class OurHomeScreen extends StatefulWidget {
 
 class _OurHomeScreenState extends State<OurHomeScreen> {
   String url = "https://www.goodreads.com";
+  Map<String, dynamic> fieldStrings = {
+    'stop': 'aaa',
+    'reading': 'aaa',
+    'remaining': 'aaa',
+    'percentage': 'aaa',
+    'today': 'aaa',
+    'start': 'aaa',
+    'prediction': 'aaa',
+    'streak': 'aaa',
+    'total': 'aaa'
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +33,65 @@ class _OurHomeScreenState extends State<OurHomeScreen> {
         ),
         centerTitle: true,
       ),
-      body: SimpleUrlPreview(
-        url: url,
-        textColor: Colors.white,
-        bgColor: Colors.blueGrey,
-        previewHeight: 150,
+      body: Container(
+        child: Column(
+          children: [
+            Container(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'Leitura atual ...',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blueGrey),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: SimpleUrlPreview(
+                      url: url,
+                      textColor: Colors.white,
+                      bgColor: Colors.blueGrey,
+                      previewHeight: 150,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Text(fieldStrings['stop']),
+                Text(fieldStrings['reading']),
+                Text(fieldStrings['remaining']),
+                Text(fieldStrings['percentage']),
+                Text(fieldStrings['today']),
+                Text(fieldStrings['start']),
+                Text(fieldStrings['prediction']),
+                Text(fieldStrings['streak']),
+                Text(fieldStrings['total']),
+              ],
+            )
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           var event = await sendData();
-          Map<String, dynamic> user = jsonDecode(event);
+          fieldStrings = jsonDecode(event);
           setState(() {
-            String str = user['details'];
+            String str = fieldStrings['details'];
             var arr = str.split('\n');
-            url = arr[6].toString();
+            String ret = arr[6].toString();
+            if (ret != '') {
+              url = ret;
+            }
           });
         },
         tooltip: 'Increment',
