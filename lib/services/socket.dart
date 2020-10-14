@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-Future<String> sendData() async {
+Future<String> sendData(String command) async {
   // Send data through Socket
 
   String textToShow = "";
@@ -17,8 +17,8 @@ Future<String> sendData() async {
   });
 
   // send Status
-  // socket.add(utf8.encode('page\n@1@600'));
-  socket.add(utf8.encode('status\n@1@ '));
+  // socket.add(utf8.encode('page@1@600'));
+  socket.add(utf8.encode(command));
 
   await Future.delayed(Duration(seconds: 3));
 
