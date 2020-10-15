@@ -13,16 +13,31 @@ class _OurHomeScreenState extends State<OurHomeScreen> {
   String url = "https://www.goodreads.com";
 
   Map<String, dynamic> fieldStrings = {
-    'stop': 'aaa',
-    'reading': 'aaa',
-    'remaining': 'aaa',
-    'percentage': 'aaa',
-    'today': 'aaa',
-    'start': 'aaa',
-    'prediction': 'aaa',
-    'streak': 'aaa',
-    'total': 'aaa'
+    'stop': '-',
+    'reading': '-',
+    'remaining': '-',
+    'percentage': '-',
+    'today': '-',
+    'start': '-',
+    'prediction': '-',
+    'streak': '-',
+    'total': '-'
   };
+
+  Future _onLoading() async {
+    String command = 'status\n1\n';
+    var event = await sendData(command);
+
+    fieldStrings = jsonDecode(event);
+    setState(() {
+      String str = fieldStrings['details'];
+      var arr = str.split('\n');
+      String ret = arr[6].toString();
+      if (ret != '') {
+        url = ret;
+      }
+    });
+  }
 
   void _addNewPageDialog() {
     TextEditingController _addNewPageValue = TextEditingController();
@@ -80,6 +95,12 @@ class _OurHomeScreenState extends State<OurHomeScreen> {
   }
 
   @override
+  void initState() {
+    _onLoading().then((value) {});
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -97,9 +118,6 @@ class _OurHomeScreenState extends State<OurHomeScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                // decoration: BoxDecoration(
-                //     color: Color.fromRGBO(120, 176, 160, 1.0),
-                //     borderRadius: BorderRadius.all(Radius.circular(16))),
                 child: Column(
                   children: [
                     SimpleUrlPreview(
@@ -108,37 +126,12 @@ class _OurHomeScreenState extends State<OurHomeScreen> {
                       bgColor: Color.fromRGBO(120, 176, 160, 1.0),
                       previewHeight: 150,
                     ),
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Última pág. lida: ',
-                              style: TextStyle(
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromRGBO(80, 76, 79, 1.0),
-                                  fontSize: 16),
-                            ),
-                            Text(
-                              fieldStrings['stop'],
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromRGBO(80, 76, 79, 1.0),
-                                  fontSize: 48),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                     Padding(
-                      padding: const EdgeInsets.all(2.0),
+                      padding: const EdgeInsets.fromLTRB(8.0, 8.0, 4.0, 16.0),
                       child: Row(
                         children: [
                           Text(
-                            'Pág. restantes: ',
+                            'Última pág. lida: ',
                             style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.bold,
@@ -146,35 +139,74 @@ class _OurHomeScreenState extends State<OurHomeScreen> {
                                 fontSize: 16),
                           ),
                           Text(
-                            fieldStrings['remaining'],
+                            fieldStrings['stop'],
                             textAlign: TextAlign.right,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromRGBO(80, 76, 79, 1.0),
-                                fontSize: 24),
+                                fontSize: 48),
                           ),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Row(
+                    Container(
+                      decoration: BoxDecoration(
+                          // borderRadius: BorderRadius.all(Radius.circular(16)),
+                          border: Border(
+                        top: BorderSide(
+                            width: 4.0, color: Color.fromRGBO(80, 76, 79, 0.5)),
+                        bottom: BorderSide(
+                            width: 4.0, color: Color.fromRGBO(80, 76, 79, 0.5)),
+                      )),
+                      child: Column(
                         children: [
-                          Text(
-                            'Percentual lido: ',
-                            style: TextStyle(
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromRGBO(80, 76, 79, 1.0),
-                                fontSize: 16),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(8.0, 8.0, 4.0, 1.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Pág. restantes: ',
+                                  style: TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(80, 76, 79, 1.0),
+                                      fontSize: 16),
+                                ),
+                                Text(
+                                  fieldStrings['remaining'],
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(80, 76, 79, 1.0),
+                                      fontSize: 24),
+                                ),
+                              ],
+                            ),
                           ),
-                          Text(
-                            fieldStrings['percentage'] + '%',
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromRGBO(80, 76, 79, 1.0),
-                                fontSize: 24),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(8.0, 1.0, 4.0, 1.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Percentual lido: ',
+                                  style: TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(80, 76, 79, 1.0),
+                                      fontSize: 16),
+                                ),
+                                Text(
+                                  fieldStrings['percentage'] + '%',
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(80, 76, 79, 1.0),
+                                      fontSize: 24),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

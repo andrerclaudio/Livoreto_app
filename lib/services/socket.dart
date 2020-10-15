@@ -16,8 +16,6 @@ Future<String> sendData(String command) async {
     textToShow = utf8.decode(event);
   });
 
-  // send Status
-  // socket.add(utf8.encode('page@1@600'));
   socket.add(utf8.encode(command));
 
   await Future.delayed(Duration(seconds: 3));
