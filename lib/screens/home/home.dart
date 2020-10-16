@@ -13,28 +13,41 @@ class _OurHomeScreenState extends State<OurHomeScreen> {
   String url = "https://www.amazon.com.br";
 
   Map<String, dynamic> fieldStrings = {
-    'stop': '-',
-    'reading': '-',
-    'remaining': '-',
-    'percentage': '-',
-    'today': '-',
-    'start': '-',
-    'prediction': '-',
-    'streak': '-',
-    'total': '-'
+    'stop': '',
+    'reading': '',
+    'remaining': '',
+    'percentage': '',
+    'today': '',
+    'start': '',
+    'prediction': '',
+    'streak': '',
+    'title': '',
+    'author': '',
+    'publisher': '',
+    'cover': '',
+    'language': '',
+    'isbn13': '',
+    'link': '',
+    'total': '',
+    'book_qty': '',
+    'book_list': '',
+    'pages': '',
+    'mean': '',
+    'max': '',
+    'week_max': '',
+    'week_min': '',
+    'clusters': '',
   };
 
-  Future _onLoading() async {
-    String command = 'status\n1\n';
+  Future _fetchUserData() async {
+    String command = 'info\n1\n';
     var event = await sendData(command);
 
     fieldStrings = jsonDecode(event);
     setState(() {
-      String str = fieldStrings['details'];
-      var arr = str.split('\n');
-      String ret = arr[6].toString();
-      if (ret != '') {
-        url = ret;
+      String str = fieldStrings['link'];
+      if (str != '') {
+        url = str;
       }
     });
   }
@@ -73,19 +86,7 @@ class _OurHomeScreenState extends State<OurHomeScreen> {
                 var value = _addNewPageValue.text;
                 String command = 'page\n1\n$value';
                 await sendData(command);
-
-                command = 'status\n1\n';
-                var event = await sendData(command);
-
-                fieldStrings = jsonDecode(event);
-                setState(() {
-                  String str = fieldStrings['details'];
-                  var arr = str.split('\n');
-                  String ret = arr[6].toString();
-                  if (ret != '') {
-                    url = ret;
-                  }
-                });
+                _fetchUserData();
               },
             ),
           ],
@@ -96,7 +97,7 @@ class _OurHomeScreenState extends State<OurHomeScreen> {
 
   @override
   void initState() {
-    _onLoading().then((value) {});
+    _fetchUserData().then((value) {});
     super.initState();
   }
 
@@ -199,6 +200,102 @@ class _OurHomeScreenState extends State<OurHomeScreen> {
                                 ),
                                 Text(
                                   fieldStrings['percentage'] + '%',
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(80, 76, 79, 1.0),
+                                      fontSize: 24),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(8.0, 1.0, 4.0, 1.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Pág. lidas hoje: ',
+                                  style: TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(80, 76, 79, 1.0),
+                                      fontSize: 16),
+                                ),
+                                Text(
+                                  fieldStrings['today'],
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(80, 76, 79, 1.0),
+                                      fontSize: 24),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(8.0, 1.0, 4.0, 1.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Livro iniciado em: ',
+                                  style: TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(80, 76, 79, 1.0),
+                                      fontSize: 16),
+                                ),
+                                Text(
+                                  fieldStrings['start'],
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(80, 76, 79, 1.0),
+                                      fontSize: 24),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(8.0, 1.0, 4.0, 1.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Previsão de término: ',
+                                  style: TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(80, 76, 79, 1.0),
+                                      fontSize: 16),
+                                ),
+                                Text(
+                                  fieldStrings['prediction'],
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(80, 76, 79, 1.0),
+                                      fontSize: 24),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(8.0, 1.0, 4.0, 8.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Nº de dias lendo em sequência: ',
+                                  style: TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(80, 76, 79, 1.0),
+                                      fontSize: 16),
+                                ),
+                                Text(
+                                  fieldStrings['streak'],
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
