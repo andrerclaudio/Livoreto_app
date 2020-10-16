@@ -10,7 +10,7 @@ class OurHomeScreen extends StatefulWidget {
 }
 
 class _OurHomeScreenState extends State<OurHomeScreen> {
-  String url = "https://www.goodreads.com";
+  String url = "https://www.amazon.com.br";
 
   Map<String, dynamic> fieldStrings = {
     'stop': '-',
