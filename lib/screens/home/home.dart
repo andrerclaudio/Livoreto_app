@@ -179,9 +179,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -227,159 +224,40 @@ class _HomeScreenState extends State<HomeScreen> {
                       Container(
                         decoration: BoxDecoration(
                           // borderRadius: BorderRadius.all(Radius.circular(16)),
-                            border: Border(
-                              top: BorderSide(
-                                  width: 4.0,
-                                  color: Color.fromRGBO(80, 76, 79, 0.5)),
-                              bottom: BorderSide(
-                                  width: 4.0,
-                                  color: Color.fromRGBO(80, 76, 79, 0.5)),
-                            )),
+                          border: Border(
+                            top: BorderSide(
+                                width: 4.0,
+                                color: Color.fromRGBO(80, 76, 79, 0.5)),
+                            // bottom: BorderSide(
+                            //     width: 4.0,
+                            //     color: Color.fromRGBO(80, 76, 79, 0.5)),
+                          ),
+                        ),
                         child: Column(
                           children: [
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(8.0, 8.0, 4.0, 1.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Pág. restantes: ',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    fieldStrings['remaining'],
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 24),
-                                  ),
-                                ],
-                              ),
+                            HomeScreenBodyInfoReading(
+                              title: 'Pág. restantes: ',
+                              info: fieldStrings['remaining'],
                             ),
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(8.0, 1.0, 4.0, 1.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Percentual lido: ',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    fieldStrings['percentage'] + '%',
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 24),
-                                  ),
-                                ],
-                              ),
+                            HomeScreenBodyInfoReading(
+                              title: 'Percentual lido: ',
+                              info: fieldStrings['percentage'] + '%',
                             ),
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(8.0, 1.0, 4.0, 1.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Pág. lidas hoje: ',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    fieldStrings['today'],
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 24),
-                                  ),
-                                ],
-                              ),
+                            HomeScreenBodyInfoReading(
+                              title: 'Pág. lidas hoje: ',
+                              info: fieldStrings['today'],
                             ),
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(8.0, 1.0, 4.0, 1.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Iniciado em: ',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    fieldStrings['start'],
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 24),
-                                  ),
-                                ],
-                              ),
+                            HomeScreenBodyInfoReading(
+                              title: 'Iniciado em: ',
+                              info: fieldStrings['start'],
                             ),
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(8.0, 1.0, 4.0, 1.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Previsão\nde término: ',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    fieldStrings['prediction'],
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 24),
-                                  ),
-                                ],
-                              ),
+                            HomeScreenBodyInfoReading(
+                              title: 'Previsão de término: ',
+                              info: fieldStrings['prediction'],
                             ),
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(8.0, 1.0, 4.0, 8.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Nº de dias lendo em sequência: ',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    fieldStrings['streak'],
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 24),
-                                  ),
-                                ],
-                              ),
+                            HomeScreenBodyInfoReading(
+                              title: 'Nº de dias lendo em sequência: ',
+                              info: fieldStrings['streak'],
                             ),
                           ],
                         ),
@@ -387,135 +265,36 @@ class _HomeScreenState extends State<HomeScreen> {
                       Container(
                         decoration: BoxDecoration(
                           // borderRadius: BorderRadius.all(Radius.circular(16)),
-                            border: Border(
-                              top: BorderSide(
-                                  width: 4.0,
-                                  color: Color.fromRGBO(80, 76, 79, 0.5)),
-                              bottom: BorderSide(
-                                  width: 4.0,
-                                  color: Color.fromRGBO(80, 76, 79, 0.5)),
-                            )),
+                          border: Border(
+                            // top: BorderSide(
+                            //     width: 4.0,
+                            //     color: Color.fromRGBO(80, 76, 79, 0.5)),
+                            bottom: BorderSide(
+                                width: 4.0,
+                                color: Color.fromRGBO(80, 76, 79, 0.5)),
+                          ),
+                        ),
                         child: Column(
                           children: [
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(8.0, 8.0, 4.0, 1.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Livro: ',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    fieldStrings['title'],
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 24),
-                                  ),
-                                ],
-                              ),
+                            // HomeScreenBodyInfoReading(
+                            //   title: 'Livro: ',
+                            //   info: fieldStrings['title'],
+                            // ),
+                            HomeScreenBodyInfoReading(
+                              title: 'Autor(a): ',
+                              info: fieldStrings['author'],
                             ),
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(8.0, 4.0, 4.0, 1.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Autor: ',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    fieldStrings['author'],
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 24),
-                                  ),
-                                ],
-                              ),
+                            HomeScreenBodyInfoReading(
+                              title: 'Editora: ',
+                              info: fieldStrings['publisher'],
                             ),
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(8.0, 4.0, 4.0, 1.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Editora: ',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    fieldStrings['publisher'],
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 24),
-                                  ),
-                                ],
-                              ),
+                            HomeScreenBodyInfoReading(
+                              title: 'Isbn: ',
+                              info: fieldStrings['isbn13'],
                             ),
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(8.0, 4.0, 4.0, 1.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Isbn: ',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    fieldStrings['isbn13'],
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 24),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(8.0, 4.0, 4.0, 8.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Qtd. de páginas: ',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    fieldStrings['total'],
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(80, 76, 79, 1.0),
-                                        fontSize: 24),
-                                  ),
-                                ],
-                              ),
+                            HomeScreenBodyInfoReading(
+                              title: 'Qtd. de páginas: ',
+                              info: fieldStrings['total'],
                             ),
                           ],
                         ),
@@ -532,13 +311,53 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+class HomeScreenBodyInfoReading extends StatelessWidget {
+  HomeScreenBodyInfoReading({Key key, this.title, this.info}) : super(key: key);
+
+  final String title;
+  final String info;
+
+  static const TextStyle optionStyleInfoTitle = TextStyle(
+      fontSize: 14,
+      fontStyle: FontStyle.italic,
+      fontWeight: FontWeight.bold,
+      color: Color.fromRGBO(80, 76, 79, 1.0));
+  static const TextStyle optionStyleInfoBody = TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: Color.fromRGBO(80, 76, 79, 1.0));
+
+  @override
+  Widget build(BuildContext context) {
+    return new Padding(
+      padding: const EdgeInsets.fromLTRB(8.0, 1.0, 8.0, .0),
+      child: new Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          new Text(
+            title,
+            style: optionStyleInfoTitle,
+            softWrap: true,
+          ),
+          new Flexible(
+            child: new Text(
+              info,
+              style: optionStyleInfoBody,
+              softWrap: true,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class CommunityScreen extends StatefulWidget {
   @override
   _CommunityScreenState createState() => _CommunityScreenState();
 }
 
 class _CommunityScreenState extends State<CommunityScreen> {
-
   @override
   void initState() {
     _communityData().then((value) {});
@@ -554,8 +373,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
         child: ListView(
           children: [
             Column(
-              children: [
-              ],
+              children: [],
             )
           ],
         ),
@@ -577,4 +395,3 @@ Future _communityData() async {
   //   url = str;
   // }
 }
-
